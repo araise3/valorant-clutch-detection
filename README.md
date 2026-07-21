@@ -10,7 +10,10 @@ Three functions — `presentCount`, `computeRealDeaths`, `detectClutch` — retu
 
 Every round runs through three sequential stages. The first two establish the ground truth — who was really in the round, and which deaths actually stuck — and the third decides whether the tracked player ended up in a clutch and how large it was.
 
-![Clutch detection pipeline](docs/clutch-pipeline.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/clutch-pipeline-dark.svg">
+  <img alt="Clutch detection pipeline" src="docs/clutch-pipeline-light.svg">
+</picture>
 
 ---
 
