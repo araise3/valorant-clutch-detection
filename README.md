@@ -12,33 +12,6 @@ Every round runs through three sequential stages. The first two establish the gr
 
 ![Clutch detection pipeline](docs/clutch-pipeline.svg)
 
-```
-STEP 1 · presentCount ─ who was actually in the round? (excludes AFK / no-shows)
-   │
-   ▼
-STEP 2 · computeRealDeaths ─ which deaths were real vs. undone by a revive?
-   │
-   ├─ Revive impossible (not Clove, no Sage on team) ──────────► death is REAL
-   │
-   └─ Revive possible ─ walk each death, in order:
-        ├─ 1. Later positional snapshot exists?
-        │        ├─ player shown alive again  ──► revived, keep walking
-        │        └─ player absent from it      ──► death is REAL
-        ├─ 2. No snapshot — round-result fallbacks?
-        │        ├─ Elimination + this team lost (full wipe) ──► REAL
-        │        ├─ Not Clove AND no live Sage teammate      ──► REAL
-        │        └─ 2b. Clove-only timing bound:
-        │                no later kill AND round outran the
-        │                17.3s Not-Dead-Yet ceiling          ──► REAL
-        └─ 3. None settle it ─────────────────────────────────► UNRESOLVED
-                                                                 (provisional real + flag)
-   │
-   ▼
-STEP 3 · detectClutch ─ did the tracked player become the last one alive
-                         with enemies still up?  (enemy count = clutch type, 1v1–1v5)
-            └─ no ──────────────────────────────────────────► NOT A CLUTCH
-```
-
 ---
 
 ## Step 1 — `presentCount`: who was actually in the round?
